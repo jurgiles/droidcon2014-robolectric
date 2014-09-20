@@ -1,6 +1,7 @@
 package com.jurgiles.sdk.droidcon2014.app;
 
 
+import android.content.Intent;
 import android.widget.TextView;
 import org.fest.assertions.api.ANDROID;
 import org.junit.Test;
@@ -41,5 +42,15 @@ public class MainActivityTest {
         Robolectric.clickOn(activity.findViewById(R.id.big_red_button));
 
         ANDROID.assertThat(activity).isFinishing();
+    }
+
+    @Test
+    public void shouldLaunchNewActivityWhenBigRedButtonPressed() {
+        MainActivity activity = ActivityController.of(MainActivity.class).create().visible().get();
+
+        Robolectric.clickOn(activity.findViewById(R.id.big_red_button));
+
+        Intent nextStartedActivity = Robolectric.getShadowApplication().getNextStartedActivity();
+        ANDROID.assertThat(nextStartedActivity).hasComponent(Robolectric.application, BrandNewActivity.class);
     }
 }
