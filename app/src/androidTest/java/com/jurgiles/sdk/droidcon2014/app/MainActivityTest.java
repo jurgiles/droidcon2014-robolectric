@@ -12,6 +12,7 @@ import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
+import org.robolectric.shadows.ShadowNotification;
 import org.robolectric.util.ActivityController;
 
 import java.util.List;
@@ -21,6 +22,7 @@ import static org.fest.assertions.api.Assertions.assertThat;
 @Config(manifest = "src/main/AndroidManifest.xml", emulateSdk = 18)
 @RunWith(RobolectricTestRunner.class)
 public class MainActivityTest {
+
 
     @Test
     public void shouldCreateActivityWithHelloText() {
@@ -69,5 +71,17 @@ public class MainActivityTest {
         List<Notification> allNotifications = Robolectric.shadowOf(notificationManager).getAllNotifications();
 
         assertThat(allNotifications).hasSize(1);
+    }
+
+    @Test
+    public void shouldLaunchWelcomeNotificationOnStartWithStuff() {
+        ActivityController.of(MainActivity.class).create().visible().start().get();
+
+        NotificationManager notificationManager = (NotificationManager) Robolectric.application.getSystemService(Context.NOTIFICATION_SERVICE);
+        Notification notification = Robolectric.shadowOf(notificationManager).getNotification(null, 123);
+
+        ShadowNotification shadowNotification = Robolectric.shadowOf(notification);
+        assertThat(shadowNotification.getContentTitle()).isEqualTo("Dance Party");
+        assertThat(shadowNotification.getContentText()).isEqualTo("Unce Unce Unce");
     }
 }

@@ -36,6 +36,13 @@ public class MainActivity extends Activity {
     @Override
     protected void onStart() {
         super.onStart();
-        ((NotificationManager) getSystemService(NOTIFICATION_SERVICE)).notify(123, new Notification());
+
+        Notification notification = new Notification.Builder(this)
+                .setSmallIcon(R.drawable.ic_launcher)
+                .setContentText("Unce Unce Unce")
+                .setContentTitle("Dance Party")
+                .build();
+
+        ((NotificationManager) getSystemService(NOTIFICATION_SERVICE)).notify(123, notification);
     }
 }
