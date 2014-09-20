@@ -17,12 +17,22 @@ import org.robolectric.util.ActivityController;
 
 import java.util.List;
 
+import static junit.framework.Assert.assertTrue;
 import static org.fest.assertions.api.Assertions.assertThat;
 
 @Config(manifest = "src/main/AndroidManifest.xml", emulateSdk = 18)
 @RunWith(RobolectricTestRunner.class)
 public class MainActivityTest {
 
+    @Test
+    public void shouldCreateActivityWithHelloTextWithoutFEST() {
+        ActivityController<MainActivity> controller = ActivityController.of(MainActivity.class);
+        MainActivity activity = controller.create().get();
+
+        TextView helloDroidconView = (TextView) activity.findViewById(R.id.hello_droidcon_text);
+
+        assertTrue("Hello Droidcon!".equals(helloDroidconView.getText()));
+    }
 
     @Test
     public void shouldCreateActivityWithHelloText() {
