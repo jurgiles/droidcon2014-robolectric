@@ -33,4 +33,13 @@ public class MainActivityTest {
         TextView helloDroidconView = (TextView) activity.findViewById(R.id.hello_droidcon_text);
         ANDROID.assertThat(helloDroidconView).containsText("Dance Dance Dance");
     }
+    
+    @Test
+    public void shouldCloseActivityWhenButtonIsPressed() {
+        MainActivity activity = ActivityController.of(MainActivity.class).create().visible().get();
+
+        Robolectric.clickOn(activity.findViewById(R.id.big_red_button));
+
+        ANDROID.assertThat(activity).isFinishing();
+    }
 }

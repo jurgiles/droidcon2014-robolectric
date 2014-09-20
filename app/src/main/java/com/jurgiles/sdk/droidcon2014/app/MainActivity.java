@@ -19,5 +19,12 @@ public class MainActivity extends Activity {
                 helloDroidconText.setText("Dance Dance Dance");
             }
         });
+
+        findViewById(R.id.big_red_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity.this.finish();
+            }
+        });
     }
 }
