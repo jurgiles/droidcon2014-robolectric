@@ -1,6 +1,8 @@
 package com.jurgiles.sdk.droidcon2014.app;
 
 import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -29,5 +31,11 @@ public class MainActivity extends Activity {
                 MainActivity.this.finish();
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        ((NotificationManager) getSystemService(NOTIFICATION_SERVICE)).notify(123, new Notification());
     }
 }
