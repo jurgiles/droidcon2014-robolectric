@@ -17,6 +17,7 @@ import org.robolectric.util.ActivityController;
 
 import java.util.List;
 
+import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
 import static org.fest.assertions.api.Assertions.assertThat;
 
@@ -93,5 +94,18 @@ public class MainActivityTest {
         ShadowNotification shadowNotification = Robolectric.shadowOf(notification);
         assertThat(shadowNotification.getContentTitle()).isEqualTo("Dance Party");
         assertThat(shadowNotification.getContentText()).isEqualTo("Unce Unce Unce");
+    }
+
+    @Test
+    public void shouldKickoffAsyncTaskOnStart() {
+        Robolectric.getBackgroundScheduler().pause();
+
+        ActivityController.of(MainActivity.class).create().visible().start().get();
+
+        assertEquals(Robolectric.getBackgroundScheduler().enqueuedTaskCount(), 1);
+
+        Robolectric.runBackgroundTasks();
+
+        assertThat(Robolectric.getBackgroundScheduler().size()).isEqualTo(0);
     }
 }

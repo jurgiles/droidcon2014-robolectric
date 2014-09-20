@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -44,5 +45,13 @@ public class MainActivity extends Activity {
                 .build();
 
         ((NotificationManager) getSystemService(NOTIFICATION_SERVICE)).notify(123, notification);
+
+
+        new AsyncTask<Void, Void, Void>(){
+            @Override
+            protected Void doInBackground(Void... params) {
+                return null;
+            }
+        }.execute();
     }
 }
