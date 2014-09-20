@@ -5,6 +5,7 @@ import android.widget.TextView;
 import org.fest.assertions.api.ANDROID;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.util.ActivityController;
@@ -16,10 +17,20 @@ public class MainActivityTest {
     @Test
     public void shouldCreateActivityWithHelloText() {
         ActivityController<MainActivity> controller = ActivityController.of(MainActivity.class);
-        MainActivity mainActivity = controller.create().get();
+        MainActivity activity = controller.create().get();
 
-        TextView helloDroidconView = (TextView) mainActivity.findViewById(R.id.hello_droidcon_text);
+        TextView helloDroidconView = (TextView) activity.findViewById(R.id.hello_droidcon_text);
 
         ANDROID.assertThat(helloDroidconView).containsText("Hello Droidcon!");
+    }
+
+    @Test
+    public void shouldChangeTextWhenButtonPressed() {
+        MainActivity activity = ActivityController.of(MainActivity.class).create().visible().get();
+
+        Robolectric.clickOn(activity.findViewById(R.id.press_me_button));
+
+        TextView helloDroidconView = (TextView) activity.findViewById(R.id.hello_droidcon_text);
+        ANDROID.assertThat(helloDroidconView).containsText("Dance Dance Dance");
     }
 }
