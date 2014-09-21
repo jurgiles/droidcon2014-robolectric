@@ -3,7 +3,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.13.0'
+        classpath 'com.android.tools.build:gradle:0.12.+'
         classpath 'org.robolectric:robolectric-gradle-plugin:0.12.+'
     }
 }
@@ -54,6 +54,5 @@ dependencies {
     androidTestCompile 'org.robolectric:robolectric:2.3'
     androidTestCompile 'junit:junit:4.11'
 }
-
 
 
