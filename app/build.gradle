@@ -44,7 +44,7 @@ robolectric {
     exclude '**/espresso/**/*.class'
 
     // configure max heap size of the test JVM
-    maxHeapSize = '256mb'
+    maxHeapSize = '256M'
 }
 
 dependencies {

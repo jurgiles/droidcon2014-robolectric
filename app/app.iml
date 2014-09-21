@@ -61,8 +61,11 @@
       <excludeFolder url="file://$MODULE_DIR$/build/intermediates" />
       <excludeFolder url="file://$MODULE_DIR$/build/outputs" />
       <excludeFolder url="file://$MODULE_DIR$/build/test-classes" />
+      <excludeFolder url="file://$MODULE_DIR$/build/test-report" />
+      <excludeFolder url="file://$MODULE_DIR$/build/test-results" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="jdk" jdkName="Android API 19 Platform" jdkType="Android SDK" />
     <orderEntry type="library" exported="" scope="TEST" name="classworlds-1.1-alpha-2" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="plexus-utils-1.5.15" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="asm-5.0.1" level="project" />
@@ -103,7 +106,6 @@
     <orderEntry type="library" exported="" scope="TEST" name="asm-util-5.0.1" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="wagon-provider-api-1.0-beta-6" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="xercesMinimal-1.9.6.2" level="project" />
-    <orderEntry type="jdk" jdkName="Android API 19 Platform" jdkType="Android SDK" />
   </component>
 </module>
 
