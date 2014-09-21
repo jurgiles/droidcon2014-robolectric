@@ -6,7 +6,9 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.widget.TextView;
+import org.apache.http.RequestLine;
 import org.fest.assertions.api.ANDROID;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
@@ -24,6 +26,11 @@ import static org.fest.assertions.api.Assertions.assertThat;
 @Config(manifest = "src/main/AndroidManifest.xml", emulateSdk = 18)
 @RunWith(RobolectricTestRunner.class)
 public class MainActivityTest {
+
+    @Before
+    public void setup() {
+        Robolectric.addPendingHttpResponse(200, "Gangsta's Paradise");
+    }
 
     @Test
     public void shouldCreateActivityWithHelloTextWithoutFEST() {
@@ -107,5 +114,15 @@ public class MainActivityTest {
         Robolectric.runBackgroundTasks();
 
         assertThat(Robolectric.getBackgroundScheduler().size()).isEqualTo(0);
+    }
+
+    @Test
+    public void shouldGetLatestSongFromNetworkAndUpdatesUI() {
+        ActivityController.of(MainActivity.class).create().visible().start().get();
+        Robolectric.runBackgroundTasks();
+
+        RequestLine requestLine = Robolectric.getNextSentHttpRequest().getRequestLine();
+        assertThat(requestLine.getMethod()).isEqualTo("GET");
+        assertThat(requestLine.getUri()).isEqualTo("www.danceparty.com/bumpin");
     }
 }

@@ -8,6 +8,11 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+
+import java.io.IOException;
 
 public class MainActivity extends Activity {
 
@@ -50,6 +55,14 @@ public class MainActivity extends Activity {
         new AsyncTask<Void, Void, Void>(){
             @Override
             protected Void doInBackground(Void... params) {
+                HttpClient client = new DefaultHttpClient();
+
+                try {
+                    client.execute(new HttpGet("www.danceparty.com/bumpin"));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
                 return null;
             }
         }.execute();
